@@ -5,7 +5,7 @@ export default function Footer() {
         <p>
           Outcome Engineering is open source under the{" "}
           <a
-            href="https://github.com/outcomeengineering/outcome.engineering/blob/main/LICENSE"
+            href="https://github.com/outcomeeng/outcome.engineering/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
             className="link-muted"
@@ -17,7 +17,7 @@ export default function Footer() {
         </p>
         <div className="flex gap-4">
           <a
-            href="https://github.com/outcomeengineering/outcome.engineering"
+            href="https://github.com/outcomeeng/outcome.engineering"
             target="_blank"
             rel="noopener noreferrer"
             className="link-muted"

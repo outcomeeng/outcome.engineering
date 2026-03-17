@@ -7,7 +7,7 @@ A methodology for spec-driven development with AI agents, centered on the Spec T
 - **Brand name**: Outcome Engineering
 - **Domain**: outcome.engineering (landing page + blog), docs.outcome.engineering (Mintlify docs)
 - **GitHub org**: Outcome Engineering
-- **Repository**: <https://github.com/outcomeengineering/outcome.engineering>
+- **Repository**: <https://github.com/outcomeeng/outcome.engineering>
 
 ## IMPORTANT RULES
 
@@ -121,5 +121,5 @@ Both require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret (configured).
 ## Related Work
 
 - [spx-cli](https://github.com/simonheimlicher/spx-cli) — CLI tool for managing the Spec Tree
-- [spx-claude](https://github.com/simonheimlicher/spx-claude) — Claude Code plugin marketplace for Outcome Engineering
+- [claude](https://github.com/outcomeeng/claude) — Claude Code plugin marketplace for Outcome Engineering
 - [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions) — GitHub Actions for Outcome Engineering workflows

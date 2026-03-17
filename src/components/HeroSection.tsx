@@ -46,7 +46,7 @@ export default function HeroSection() {
             </div>
           </div>
           <a
-            href="https://github.com/outcomeengineering"
+            href="https://github.com/outcomeeng"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-[0.6em] px-7 py-3 border border-[rgba(180,200,150,0.25)] text-[#d0e0c0] text-sm tracking-[0.05em] no-underline rounded-sm transition-all hover:bg-[rgba(180,200,150,0.07)] hover:border-[rgba(180,200,150,0.45)]"

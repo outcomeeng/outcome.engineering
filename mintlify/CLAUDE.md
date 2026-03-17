@@ -7,7 +7,7 @@ Documentation site for the Outcome Engineering methodology, hosted at docs.outco
 - **Brand name**: Outcome Engineering
 - **Domain**: docs.outcome.engineering
 - **GitHub org**: Outcome Engineering
-- **Repository**: [outcomeengineering/outcome.engineering](https://github.com/outcomeengineering/outcome.engineering)
+- **Repository**: [outcomeeng/outcome.engineering](https://github.com/outcomeeng/outcome.engineering)
 - **Platform**: Mintlify
 
 ## IMPORTANT RULES

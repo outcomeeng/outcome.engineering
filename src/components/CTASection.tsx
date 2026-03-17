@@ -18,7 +18,7 @@ export default function CTASection() {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="https://github.com/outcomeengineering"
+            href="https://github.com/outcomeeng"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
@@ -41,7 +41,7 @@ export default function CTASection() {
             </svg>
           </a>
           <a
-            href="https://github.com/outcomeengineering/spx-cli"
+            href="https://github.com/outcomeeng/spx-cli"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"

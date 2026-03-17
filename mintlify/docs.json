@@ -77,7 +77,7 @@
       "anchors": [
         {
           "anchor": "GitHub",
-          "href": "https://github.com/outcomeengineering/outcome.engineering",
+          "href": "https://github.com/outcomeeng/outcome.engineering",
           "icon": "github"
         }
       ]
@@ -91,7 +91,7 @@
     "links": [
       {
         "label": "GitHub",
-        "href": "https://github.com/outcomeengineering/outcome.engineering"
+        "href": "https://github.com/outcomeeng/outcome.engineering"
       }
     ]
   },
@@ -105,7 +105,7 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/outcomeengineering"
+      "github": "https://github.com/outcomeeng"
     }
   },
   "description": "A methodology for spec-driven development with AI agents, centered on the Spec Tree."
