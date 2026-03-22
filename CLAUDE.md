@@ -111,7 +111,7 @@ Example: `.playwright-mcp/feat-landing-page/hero-initial-state.png`
 
 ## CI/CD
 
-GitHub Actions workflows in `.github/workflows/` use reusable workflows from [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions):
+GitHub Actions workflows in `.github/workflows/` use reusable workflows from [gh-actions](https://github.com/outcomeeng/gh-actions):
 
 - **`claude.yml`** — Interactive Claude assistant triggered by `@claude` mentions on issues and PRs
 - **`claude-code-review.yml`** — Automatic code review on pull request open/synchronize
@@ -120,6 +120,6 @@ Both require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret (configured).
 
 ## Related Work
 
-- [spx-cli](https://github.com/simonheimlicher/spx-cli) — CLI tool for managing the Spec Tree
+- [spx](https://github.com/outcomeeng/spx) — CLI tool for managing the Spec Tree
 - [claude](https://github.com/outcomeeng/claude) — Claude Code plugin marketplace for Outcome Engineering
-- [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions) — GitHub Actions for Outcome Engineering workflows
+- [gh-actions](https://github.com/outcomeeng/gh-actions) — GitHub Actions for Outcome Engineering workflows

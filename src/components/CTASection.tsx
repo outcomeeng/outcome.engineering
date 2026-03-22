@@ -41,7 +41,7 @@ export default function CTASection() {
             </svg>
           </a>
           <a
-            href="https://github.com/outcomeeng/spx-cli"
+            href="https://github.com/outcomeeng/spx"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
