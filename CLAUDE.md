@@ -121,5 +121,5 @@ Both require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret (configured).
 ## Related Work
 
 - [spx](https://github.com/outcomeeng/spx) — CLI tool for managing the Spec Tree
-- [claude](https://github.com/outcomeeng/claude) — Claude Code plugin marketplace for Outcome Engineering
+- [plugins](https://github.com/outcomeeng/plugins) — Claude Code plugin marketplace for Outcome Engineering
 - [gh-actions](https://github.com/outcomeeng/gh-actions) — GitHub Actions for Outcome Engineering workflows
