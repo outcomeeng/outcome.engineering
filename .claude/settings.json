@@ -2,5 +2,10 @@
   "enabledPlugins": {
     "frontend@outcomeeng": true,
     "typescript@outcomeeng": true
+  },
+  "extraKnownMarketplaces": {
+    "outcomeeng": {
+      "source": { "source": "github", "repo": "outcomeeng/plugins", "ref": "main" }
+    }
   }
 }
