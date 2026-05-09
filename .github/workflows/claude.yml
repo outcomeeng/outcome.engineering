@@ -2,7 +2,6 @@
 #
 # Required setup:
 # 1. Add CLAUDE_CODE_OAUTH_TOKEN to repository secrets
-# 2. Adjust authorized_roles if needed
 
 name: Claude Code
 
@@ -36,7 +35,6 @@ jobs:
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
     # Uncomment and modify to customize:
     # with:
-    #   authorized_roles: '["OWNER", "MEMBER"]'
     #   mention_trigger: '@bot'
     #   concurrency_cancel: false
     #   allowed_tools: '--allowed-tools "Read,Grep,Glob,Bash(gh pr:*)"'
