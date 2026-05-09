@@ -18,8 +18,8 @@ on:
 
 permissions:
   contents: read
-  issues: read
-  pull-requests: read
+  issues: write
+  pull-requests: write
   id-token: write
   actions: read
 
@@ -27,8 +27,8 @@ jobs:
   claude:
     permissions:
       contents: read
-      issues: read
-      pull-requests: read
+      issues: write
+      pull-requests: write
       id-token: write
       actions: read
     uses: outcomeeng/gh-actions/.github/workflows/claude.yml@main
