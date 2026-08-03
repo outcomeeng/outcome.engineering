@@ -485,7 +485,9 @@ The Next.js application that renders and deploys the Outcome Engineering methodo
 | `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`                   |
 | `python3 -m pytest tests/` | Python tests for the asset generation scripts — run manually, outside the CI gate |
 
-`pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency, so every contributor and every CI run use the same gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:repo` require `pnpm build` first. `docs/publication/site-architecture.md` names `pnpm validate:repo` as a required pull-request gate.
+`pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency rather than an ambient global install, and `pnpm-lock.yaml` pins the resolved version, so CI and any `--frozen-lockfile` install run an identical gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:repo` require `pnpm build` first. `docs/publication/site-architecture.md` names `pnpm validate:repo` as a required pull-request gate.
+
+`@outcomeeng/spx` carries an unbounded `>=` range where every other dependency here uses a caret. This is deliberate and is the one exception: spx is first-party and tracks its own tip, so the range never withholds a release, including a major. The lockfile still fixes what any frozen install resolves; a non-frozen local install may pick up a newer gate than the lockfile records, which is the intended trade for staying current with our own tool.
 
 The pytest suite under `tests/` is deliberately outside CI. It sits in an ungoverned location that predates any spec tree, and `tests/unit/test_shell_wrapper.py` asserts against a `scripts/generate-logos.sh` wrapper the repository does not contain. Treat a regression in `assets/generate/` as uncovered by automation until that suite is relocated under a governing node and its failing cases are resolved.
 
