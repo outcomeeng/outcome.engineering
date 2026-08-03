@@ -13,19 +13,16 @@ name: Deterministic Verification
 # provider outage is a variable flip, not a pull request. Unset it to fall back
 # to GitHub-hosted `ubuntu-latest`.
 
+# No paths-ignore. `pnpm validate` includes the markdown check, which covers
+# CLAUDE.md, AGENTS.md, README.md, docs/**, and mintlify/**, so excluding those
+# paths would let a documentation-only pull request merge without the gate the
+# root guide requires to be clean before every commit. Running both jobs on
+# every pull request costs about a minute and keeps that guarantee true.
 on:
   push:
     branches: [main]
-    paths-ignore: &instruction-docs
-      - CLAUDE.md
-      - AGENTS.md
-      - README.md
-      - LICENSE
-      - docs/**
-      - mintlify/**
   pull_request:
     branches: [main]
-    paths-ignore: *instruction-docs
 
 # Deny all permissions by default — grant per-job
 permissions: {}

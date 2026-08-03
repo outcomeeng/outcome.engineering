@@ -4,16 +4,13 @@ name: Dependency Security
 # critical vulnerability. This is the gate that makes Renovate automerge safe:
 # a dependency update cannot merge itself past a known advisory.
 
+# No paths-ignore. A skipped check is not a passing check: the merge gate reads
+# SKIPPED as non-terminal-green, so excluding paths here would block rather than
+# speed up a documentation-only pull request. The action is inexpensive and
+# passes trivially when a diff carries no dependency change.
 on:
   pull_request:
     branches: [main]
-    paths-ignore:
-      - CLAUDE.md
-      - AGENTS.md
-      - README.md
-      - LICENSE
-      - docs/**
-      - mintlify/**
 
 # Deny all permissions by default — grant per-job
 permissions: {}

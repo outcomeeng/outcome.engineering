@@ -473,19 +473,21 @@ The Next.js application that renders and deploys the Outcome Engineering methodo
 
 ## Commands
 
-| Command                    | Purpose                                                            |
-| -------------------------- | ------------------------------------------------------------------ |
-| `pnpm dev`                 | Dev server (Next.js + Turbopack)                                   |
-| `pnpm build`               | Production build                                                   |
-| `pnpm start`               | Serve the production build                                         |
-| `pnpm lint`                | Next.js ESLint pass                                                |
-| `pnpm validate`            | Validation gate without the circular check — needs no build output |
-| `pnpm circular`            | Circular-dependency check — requires a completed `pnpm build`      |
-| `pnpm validate:repo`       | Full gate including circular — requires a completed `pnpm build`   |
-| `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`    |
-| `python3 -m pytest tests/` | Python tests covering the asset generation scripts                 |
+| Command                    | Purpose                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| `pnpm dev`                 | Dev server (Next.js + Turbopack)                                                  |
+| `pnpm build`               | Production build                                                                  |
+| `pnpm start`               | Serve the production build                                                        |
+| `pnpm lint`                | Next.js ESLint pass                                                               |
+| `pnpm validate`            | Validation gate without the circular check — needs no build output                |
+| `pnpm circular`            | Circular-dependency check — requires a completed `pnpm build`                     |
+| `pnpm validate:repo`       | Full gate including circular — requires a completed `pnpm build`                  |
+| `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`                   |
+| `python3 -m pytest tests/` | Python tests for the asset generation scripts — run manually, outside the CI gate |
 
 `pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency, so every contributor and every CI run use the same gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:repo` require `pnpm build` first. `docs/publication/site-architecture.md` names `pnpm validate:repo` as a required pull-request gate.
+
+The pytest suite under `tests/` is deliberately outside CI. It sits in an ungoverned location that predates any spec tree, and `tests/unit/test_shell_wrapper.py` asserts against a `scripts/generate-logos.sh` wrapper the repository does not contain. Treat a regression in `assets/generate/` as uncovered by automation until that suite is relocated under a governing node and its failing cases are resolved.
 
 ### Spec-tree phase commands
 
