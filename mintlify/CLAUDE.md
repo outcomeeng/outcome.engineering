@@ -1,61 +1,39 @@
 # Outcome Engineering Docs
 
-Documentation site for the Outcome Engineering methodology, hosted at docs.outcome.engineering.
+The Mintlify documentation site published at docs.outcome.engineering. Its source lives in this directory; the Next.js landing page and blog live at the repository root.
 
-## Project Identity
+## Governing instructions
 
-- **Brand name**: Outcome Engineering
+The repository root guides carry the managed Spec Tree router and every blocking workflow requirement — context loading, base sync, verification, and the merge lifecycle. Read the guide for the active harness before working here: `../CLAUDE.md` for Claude Code, `../AGENTS.md` for Codex. This file supplements them with directory-specific facts and overrides nothing.
+
+## Identity
+
 - **Domain**: docs.outcome.engineering
-- **GitHub org**: Outcome Engineering
-- **Repository**: [outcomeeng/outcome.engineering](https://github.com/outcomeeng/outcome.engineering)
 - **Platform**: Mintlify
+- **Repository**: [outcomeeng/outcome.engineering](https://github.com/outcomeeng/outcome.engineering)
 
-## IMPORTANT RULES
+## Content structure
 
-1. **Never use Claude as commit author.** All commits must use the repository owner's git identity (`Simon Heimlicher <simon.github@heimlicher.com>`), not Claude or any AI assistant.
-
-## Core Positioning
-
-Outcome Engineering is a methodology for spec-driven development with AI agents. The Spec Tree is a git-native product structure with outcome hypotheses, drift detection via lock files, and deterministic context injection.
-
-## Content Structure
-
-Two tabs: Guide (conceptual narrative) and Reference (technical specifications).
+Two tabs, configured in `docs.json`: Guide for the conceptual narrative, Reference for technical specification.
 
 ```
 mintlify/
-├── docs.json                    # Mintlify configuration
-├── index.mdx                    # Homepage
-├── guide/
-│   ├── overview.mdx             # From outputs to outcomes
-│   ├── spec-tree.mdx            # What the Spec Tree is
-│   ├── nodes.mdx                # What a node looks like
-│   ├── building.mdx             # Index numbering, growing the tree
-│   ├── deterministic-context.mdx # Context injection
-│   ├── lock-files.mdx           # Drift detection
-│   ├── operational-loop.mdx     # spx status/lock/verify
-│   ├── guidelines.mdx           # Three guidelines
-│   ├── testing.mdx              # Testing philosophy
-│   └── agent-skills.mdx         # Skill layers
-└── reference/
-    ├── node-types.mdx           # Enabler, outcome, product, decisions
-    ├── index-numbering.mdx      # Sparse integer distribution
-    ├── node-states.mdx          # Valid, stale, needs work
-    ├── filesystem.mdx           # Naming conventions
-    ├── lock-file.mdx            # spx-lock.yaml schema
-    ├── assertions.mdx           # Assertion format
-    ├── spx-cli.mdx              # Command reference
-    └── context-injection.mdx    # Injection algorithm
+├── docs.json          # Mintlify configuration and navigation
+├── index.mdx          # Homepage
+├── guide/             # overview, spec-tree, nodes, building,
+│                      # deterministic-context, lock-files,
+│                      # operational-loop, guidelines, testing,
+│                      # agent-skills
+└── reference/         # node-types, index-numbering, node-states,
+                       # filesystem, lock-file, assertions,
+                       # spx-cli, context-injection
 ```
 
-## Authoritative Source
+`docs.json` is the authority on navigation; the tree above orients a reader and is not a second source of truth.
 
-`spec-tree.md` is the authoritative source for the current model. Key terminology:
+## Methodology content
 
-- Two node types: **enabler** and **outcome** (not capability/feature/story)
-- Numeric prefixes are called **index** (not BSP)
-- Only lock file is **spx-lock.yaml**
-- Tree relationships: ancestors, parents, siblings, children, descendants
+The methodology this site documents is authored in a separate repository and is under active revision. `docs/publication/site-architecture.md` and `docs/publication/release-plan.md` at the repository root govern which methodology content is current, how versioned content is published, and which existing pages are superseded. Read both before changing any guide or reference page, and do not treat a page's current wording as evidence that its concepts are still current.
 
 ## Development
 
@@ -64,4 +42,4 @@ npm i -g mint
 mint dev
 ```
 
-Preview at http://localhost:3000
+Preview at http://localhost:3000.
