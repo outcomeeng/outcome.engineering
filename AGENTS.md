@@ -473,17 +473,19 @@ The Next.js application that renders and deploys the Outcome Engineering methodo
 
 ## Commands
 
-| Command                    | Purpose                                                                              |
-| -------------------------- | ------------------------------------------------------------------------------------ |
-| `pnpm dev`                 | Dev server (Next.js + Turbopack)                                                     |
-| `pnpm build`               | Production build                                                                     |
-| `pnpm start`               | Serve the production build                                                           |
-| `pnpm lint`                | Next.js ESLint pass                                                                  |
-| `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`                      |
-| `spx validation all`       | Validation gate — TypeScript, ESLint, circular dependencies, literal reuse, markdown |
-| `python3 -m pytest tests/` | Python tests covering the asset generation scripts                                   |
+| Command                    | Purpose                                                            |
+| -------------------------- | ------------------------------------------------------------------ |
+| `pnpm dev`                 | Dev server (Next.js + Turbopack)                                   |
+| `pnpm build`               | Production build                                                   |
+| `pnpm start`               | Serve the production build                                         |
+| `pnpm lint`                | Next.js ESLint pass                                                |
+| `pnpm validate`            | Validation gate without the circular check — needs no build output |
+| `pnpm circular`            | Circular-dependency check — requires a completed `pnpm build`      |
+| `pnpm validate:full`       | Full gate including circular — requires a completed `pnpm build`   |
+| `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`    |
+| `python3 -m pytest tests/` | Python tests covering the asset generation scripts                 |
 
-`spx validation all` must be clean before every commit. Run `pnpm build` first — the circular-dependency check reads `.next/types` and fails when no build output exists.
+`pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency, so every contributor and every CI run use the same gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:full` require `pnpm build` first.
 
 ## Commit and review conventions
 
@@ -521,12 +523,14 @@ Tokens live in `src/app/globals.css`.
 
 ## CI/CD
 
-GitHub Actions in `.github/workflows/` use reusable workflows from [gh-actions](https://github.com/outcomeeng/gh-actions):
+GitHub Actions in `.github/workflows/`:
 
+- `deterministic-verification.yml` — `pnpm validate` in one job; `pnpm build` followed by `pnpm circular` in another
+- `dependency-review.yml` — fails a pull request that introduces a high or critical advisory
 - `claude.yml` — interactive Claude assistant on `@claude` mentions
 - `claude-code-review.yml` — automatic review on pull request open and synchronize
 
-Both require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret, which is configured.
+The two verification workflows are repository-owned and pin every action by commit SHA. The two Claude workflows call reusable workflows from [gh-actions](https://github.com/outcomeeng/gh-actions) and require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret, which is configured.
 
 ## Playwright MCP screenshots
 
