@@ -14,7 +14,7 @@
     "start": "next start",
     "lint": "next lint",
     "validate": "spx validation all --skip-circular",
-    "validate:full": "spx validation all",
+    "validate:repo": "spx validation all",
     "circular": "spx validation circular",
     "logo:generate": "uv run assets/generate/generate_logos.py"
   },

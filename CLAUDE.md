@@ -226,11 +226,22 @@ The Next.js application that renders and deploys the Outcome Engineering methodo
 | `pnpm lint`                | Next.js ESLint pass                                                |
 | `pnpm validate`            | Validation gate without the circular check — needs no build output |
 | `pnpm circular`            | Circular-dependency check — requires a completed `pnpm build`      |
-| `pnpm validate:full`       | Full gate including circular — requires a completed `pnpm build`   |
+| `pnpm validate:repo`       | Full gate including circular — requires a completed `pnpm build`   |
 | `pnpm logo:generate`       | Regenerate logo assets from `assets/generate/generate_logos.py`    |
 | `python3 -m pytest tests/` | Python tests covering the asset generation scripts                 |
 
-`pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency, so every contributor and every CI run use the same gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:full` require `pnpm build` first.
+`pnpm validate` must be clean before every commit. It resolves through the repository's own `@outcomeeng/spx` devDependency, so every contributor and every CI run use the same gate. The circular check reads `.next/types`, which only a completed build produces, so `pnpm circular` and `pnpm validate:repo` require `pnpm build` first. `docs/publication/site-architecture.md` names `pnpm validate:repo` as a required pull-request gate.
+
+### Spec-tree phase commands
+
+The router above directs a reader here for the product's command per spec-tree phase:
+
+| Phase      | Command                                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| **author** | None. No generated spec-tree artifact exists to rebuild until a spec tree is bootstrapped under `spx/`.               |
+| **verify** | `pnpm validate` for the changeset; add `pnpm build && pnpm circular` when the change touches routes or module graph.  |
+| **gate**   | `pnpm build && pnpm validate:repo` — the full deterministic bundle, build first because circular reads `.next/types`. |
+| **merge**  | None. No override; `/merge` applies the default lifecycle and transport.                                              |
 
 ## Commit and review conventions
 
