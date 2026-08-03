@@ -1,0 +1,64 @@
+name: Deterministic Verification
+
+# Deterministic verification for the website: the source validation pipeline
+# and the production build.
+#
+# The validation job runs `spx validation all --skip-circular` because the
+# circular-dependency check reads `.next/types`, which only a completed build
+# produces. Circular therefore runs in the build job, after `next build`,
+# rather than fanning out from a shared artifact — `.next` is far larger than
+# a CLI `dist/`, so rebuilding is cheaper than uploading and downloading it.
+#
+# Runner selection goes through the org-level `RUNNER_X2` variable so a
+# provider outage is a variable flip, not a pull request. Unset it to fall back
+# to GitHub-hosted `ubuntu-latest`.
+
+# No paths-ignore. `pnpm validate` includes the markdown check, which covers
+# CLAUDE.md, AGENTS.md, README.md, docs/**, and mintlify/**, so excluding those
+# paths would let a documentation-only pull request merge without the gate the
+# root guide requires to be clean before every commit. Running both jobs on
+# every pull request costs about a minute and keeps that guarantee true.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Deny all permissions by default — grant per-job
+permissions: {}
+
+jobs:
+  validation:
+    name: Validation
+    runs-on: ${{ vars.RUNNER_X2 || 'ubuntu-latest' }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - run: corepack enable
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      # Lint, typecheck, literal-reuse, markdown, and formatting in registry
+      # order. Circular is excluded here and runs in the build job.
+      - run: pnpm run validate
+
+  build:
+    name: Build + circular dependencies
+    runs-on: ${{ vars.RUNNER_X2 || 'ubuntu-latest' }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - run: corepack enable
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm run build
+      # dependency-cruiser resolves Next.js route types from `.next/types`,
+      # so this step requires the build above to have completed.
+      - run: pnpm run circular
